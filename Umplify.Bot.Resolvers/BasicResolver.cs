@@ -29,10 +29,12 @@ namespace Umplify.Bot.Resolvers
 
 				if (File.Exists(path))
 				{
-					loadedList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<T>>(path);
+					loadedList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(path));
 				}
-
-				throw new FileNotFoundException("File not found.", path);
+				else
+				{
+					throw new FileNotFoundException("File not found.", path);
+				}
 			}
 			catch (Exception ex)
 			{
