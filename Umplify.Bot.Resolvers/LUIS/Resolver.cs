@@ -24,7 +24,7 @@ namespace Umplify.Bot.Resolvers.LUIS
 			_luisSettingsList = Load();
 		}
 
-		public LUISSettings Get() => _luisSettingsList.FirstOrDefault(settings => settings.CustomerKey == _applicationSettings.CustomerKey);
+		public LUISSettings Get(string customerSettings) => _luisSettingsList.FirstOrDefault(settings => settings.CustomerKey == customerSettings);
 
 		protected override List<LUISSettings> Load()
 		{

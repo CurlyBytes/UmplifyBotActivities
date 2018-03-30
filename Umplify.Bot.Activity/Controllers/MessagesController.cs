@@ -34,7 +34,7 @@ namespace Umplify.Bot.Activity.Controllers
             if (activity.Type == ActivityTypes.Message)
             {
                 //MicrosoftAppCredentials.TrustServiceUrl(activity.ServiceUrl);
-                var appCredentials = new MicrosoftAppCredentials(_microsoftAppSettingsResolver.Get().Id, _microsoftAppSettingsResolver.Get().Password,_logger);
+                var appCredentials = new MicrosoftAppCredentials(_microsoftAppSettingsResolver.Get(activity.From.Id).Id, _microsoftAppSettingsResolver.Get(activity.From.Id).Password,_logger);
                 var connector = new ConnectorClient(new Uri(activity.ServiceUrl), appCredentials);
 
                 // return our reply to the user

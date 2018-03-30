@@ -24,7 +24,7 @@ namespace Umplify.Bot.Resolvers.Microsoft
 			_microsoftSettingsList = Load();
 		}
 
-		public MicrosoftAppSettings Get() => _microsoftSettingsList.FirstOrDefault(settings => settings.CustomerKey == _applicationSettings.CustomerKey);
+		public MicrosoftAppSettings Get(string customerKey) => _microsoftSettingsList.FirstOrDefault(settings => settings.CustomerKey == customerKey);
 
 		protected override List<MicrosoftAppSettings> Load()
 		{

@@ -4,6 +4,6 @@ namespace Umplify.Bot.Resolvers
 {
     public interface IResolver<T>
     {
-        T Get();
+        T Get(string customerKey);
     }
 }
