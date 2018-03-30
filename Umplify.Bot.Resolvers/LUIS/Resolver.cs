@@ -28,8 +28,6 @@ namespace Umplify.Bot.Resolvers.LUIS
 
 		protected override List<LUISSettings> Load()
 		{
-			Test();
-
 			var luisSettings = base.Load();
 
 			if(luisSettings.GroupBy(luisSetting => luisSetting.CustomerKey).Count() != luisSettings.Count)
@@ -38,28 +36,6 @@ namespace Umplify.Bot.Resolvers.LUIS
 			}
 
 			return luisSettings;
-		}
-
-		private void Test()
-		{
-			var uluisSettings1 = new LUISSettings
-			{
-				ApiHostName = "apihostname",
-				ApiKey = "apikey",
-				AppId = "apiId",
-				CustomerKey = "233"
-			};
-
-			var uluisSettings2 = new LUISSettings
-			{
-				ApiHostName = "apihostname2",
-				ApiKey = "apikey2",
-				AppId = "apiId2",
-				CustomerKey = "233222"
-			};
-
-			var list = new List<LUISSettings> { uluisSettings1, uluisSettings2 };
-			var kookoo = Newtonsoft.Json.JsonConvert.SerializeObject(list);
 		}
 	}
 }
