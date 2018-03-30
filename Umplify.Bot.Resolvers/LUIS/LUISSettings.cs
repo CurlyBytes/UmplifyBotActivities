@@ -1,6 +1,6 @@
 ﻿namespace Umplify.Bot.Resolvers.LUIS
 {
-    public sealed class Settings
+    public sealed class LUISSettings
     {
         public string CustomerKey { get; set; }
         public string ApiKey { get; set; }

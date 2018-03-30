@@ -1,0 +1,14 @@
+﻿[
+  {
+    "CustomerKey": "key1",
+    "ApiKey": "apikey2",
+    "AppId": "apiId1",
+    "ApiHostName": "apihostname1"
+  },
+  {
+    "CustomerKey": "TestCustomerKey",
+    "ApiKey": "apikey2",
+    "AppId": "apiId2",
+    "ApiHostName": "apihostname2"
+  }
+]

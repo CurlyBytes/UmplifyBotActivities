@@ -1,0 +1,17 @@
+﻿[
+  {
+    "Id": "id1",
+    "Password": "password1",
+    "CustomerKey": "Key1"
+  },
+  {
+    "Id": "id2",
+    "Password": "password2",
+    "CustomerKey": "Key2"
+  },
+  {
+    "Id": "id3",
+    "Password": "password3",
+    "CustomerKey": "TestCustomerKey"
+  }
+]

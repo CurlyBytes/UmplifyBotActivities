@@ -1,43 +1,40 @@
-﻿using Microsoft.Bot.Connector;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Bot.Connector;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Results;
-using Umplify.Bot.Activity.Settings;
 using Umplify.Bot.Resolvers;
+using Umplify.Bot.Resolvers.LUIS;
+using Umplify.Bot.Resolvers.Microsoft;
 
 namespace Umplify.Bot.Activity.Controllers
 {
-    public class MessagesController : ApiController
+	[Route("api/[controller]")]
+	public class MessagesController : Controller
     {
-        private readonly MicrosoftAppSettings _microsoftAppSettings;
         private readonly ILogger<MessagesController> _logger;
-        private readonly IResolver<Resolvers.LUIS.Settings> _luisSettings;
-        private readonly IResolver<Resolvers.LUIS.Settings> _luisResolver;
+        private readonly IResolver<MicrosoftAppSettings> _microsoftAppSettingsResolver;
+        private readonly IResolver<LUISSettings> _luisResolver;
 
-        public MessagesController(
-			IResolver<Resolvers.LUIS.Settings> luisResolver,
-			ILoggerFactory loggerFactory,
-			IResolver<Resolvers.LUIS.Settings> luisSettings,
-            IOptions<MicrosoftAppSettings> microsoftAppSettingsOptions)
-        {
-            _microsoftAppSettings = microsoftAppSettingsOptions.Value;
-            _logger = loggerFactory?.CreateLogger<MessagesController>();
-            _luisSettings = luisSettings;
-            _luisResolver = luisResolver;
-        }
+		public MessagesController(
+			IResolver<LUISSettings> luisResolver,
+			IResolver<MicrosoftAppSettings> microsoftAppSettingsResolver,
+			ILoggerFactory loggerFactory)
+		{
+			_logger = loggerFactory?.CreateLogger<MessagesController>();
+			_microsoftAppSettingsResolver = microsoftAppSettingsResolver;
+			_luisResolver = luisResolver;
+		}
 
-
-        [Authorize(Roles = "Bot")]
-        [HttpPost]
+		//[ResponseType(typeof(void))]
+		//[Authorize(Roles = "Bot")]
+		[HttpPost]
         public async Task<OkResult> Post([FromBody] Microsoft.Bot.Connector.Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
             {
                 //MicrosoftAppCredentials.TrustServiceUrl(activity.ServiceUrl);
-                var appCredentials = new MicrosoftAppCredentials(_microsoftAppSettings.Id,_microsoftAppSettings.Password,_logger);
+                var appCredentials = new MicrosoftAppCredentials(_microsoftAppSettingsResolver.Get().Id, _microsoftAppSettingsResolver.Get().Password,_logger);
                 var connector = new ConnectorClient(new Uri(activity.ServiceUrl), appCredentials);
 
                 // return our reply to the user

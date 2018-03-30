@@ -1,8 +1,9 @@
-﻿namespace Umplify.Bot.Resolvers
+﻿using System.Collections.Generic;
+
+namespace Umplify.Bot.Resolvers
 {
-    public interface IResolver<out T>
+    public interface IResolver<T>
     {
-        T Get(string customerKey);
-        bool Load();
+        T Get();
     }
 }
