@@ -1,4 +1,4 @@
-# Multi-tenant bot activity support
+# Multi-tenant bot activity support in .net core 2.0
 
 This project is an example for serving multiple tenants by a single bot activity action. The key area is supplying right Microsoft app settings (or e.g. LUIS  settings) to each activity submitted
 via POST requests.
